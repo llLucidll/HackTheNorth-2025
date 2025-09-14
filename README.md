@@ -62,3 +62,6 @@ COHERE_API_KEY=***
 SHOP=mystore.myshopify.com
 STOREFRONT_ACCESS_TOKEN=***
 DATABASE_URL=postgresql://user:pass@localhost:5432/instashop
+```
+### 3) Start instructions
+uvicorn app.app:app --reload --host 0.0.0.0 --port 8000 

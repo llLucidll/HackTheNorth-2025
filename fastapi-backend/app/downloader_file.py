@@ -2,7 +2,6 @@
 from io import BytesIO
 from tempfile import SpooledTemporaryFile
 from fastapi import UploadFile
-import yt_dlp
 
 def tiktok_to_uploadfile(url: str) -> UploadFile:
     buf = BytesIO()

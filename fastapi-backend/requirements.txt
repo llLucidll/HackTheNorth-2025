@@ -6,3 +6,4 @@ pydantic
 pydantic-settings
 google.generativeai
 pillow
+python-multipart

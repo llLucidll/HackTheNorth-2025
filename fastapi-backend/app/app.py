@@ -56,8 +56,8 @@ if Path("static").exists():
 # -----------------------------------------------------------------------------
 # External helpers (you already have these)
 # -----------------------------------------------------------------------------
-from .downloader_file import tiktok_to_uploadfile
-from .gemini_analyzer import GeminiAnalyzer
+from app.downloader_file import tiktok_to_uploadfile
+from app.gemini_analyzer import GeminiAnalyzer
 
 # -----------------------------------------------------------------------------
 # Models (generic)

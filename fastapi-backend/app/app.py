@@ -48,10 +48,6 @@ DATA_DIR.mkdir(exist_ok=True)
 # Serve frames under /static/<video_id>/frames/frame_XXX.jpg
 app.mount("/static", StaticFiles(directory=str(DATA_DIR)), name="static")
 
-# Optionally serve your frontend (built files) at /app (NOT "/")
-# If you don't have a frontend folder yet, comment this out.
-if Path("static").exists():
-    app.mount("/app", StaticFiles(directory="static", html=True), name="frontend")
 
 # -----------------------------------------------------------------------------
 # External helpers (you already have these)

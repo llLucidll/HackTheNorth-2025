@@ -1,23 +1,23 @@
-# Backend Dockerfile
 FROM python:3.11-slim
+
+# System deps (ffmpeg for frame extraction)
+RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg \
+  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
+# Install Python deps first for better caching
+COPY fastapi-backend/requirements.txt .
+RUN python -m pip install --no-cache-dir -r requirements.txt
 
-# Copy requirements and install Python packages
-COPY fastapi-backend/requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
+# Copy the backend code
 COPY fastapi-backend/ ./
 
-# Create data directory
+# Optional: create the runtime data dir
 RUN mkdir -p data
 
-EXPOSE 8000
+# Log without buffering
+ENV PYTHONUNBUFFERED=1
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Bind to Railway's $PORT (fallback to 8000 locally)
+CMD ["sh", "-c", "uvicorn app.app:app --host 0.0.0.0 --port ${PORT:-8000}"]
